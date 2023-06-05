@@ -11,5 +11,3 @@ chill is a fast syntax highlighter and tokenizer.
 - [ ] C
 - [ ] C++
 - [ ] Java
-
-## Why 
