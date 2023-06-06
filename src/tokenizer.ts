@@ -30,7 +30,7 @@ export const tokenize = (code: string, rules: ParseRule[]) => {
       if (
         cachedPattern[i].match[0] &&
         (firstMatched == null ||
-          cachedPattern[i].match.index! <= firstMatched.match.index!)
+          cachedPattern[i].match.index! < firstMatched.match.index!)
       ) {
         firstMatched = cachedPattern[i];
       }
