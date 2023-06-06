@@ -18,16 +18,11 @@ describe('tokenizer', () => {
       const commentTokens = tokens.filter((token) => token.kind === 'comment');
       expect(commentTokens.length).toBe(2);
       expect(
-        commentTokens.find(
-          (token) =>
-            token.value.includes('this is comment') && token.kind === 'comment',
-        ),
+        commentTokens.find((token) => token.value.includes('this is comment')),
       ).not.toBeFalsy();
       expect(
-        commentTokens.find(
-          (token) =>
-            token.value.includes('this is multiline comment') &&
-            token.kind === 'comment',
+        commentTokens.find((token) =>
+          token.value.includes('this is multiline comment'),
         ),
       ).not.toBeFalsy();
     });
@@ -61,14 +56,10 @@ describe('tokenizer', () => {
       );
       const stringTokens = tokens.filter((token) => token.kind === 'string');
       expect(
-        stringTokens.find(
-          (token) => token.value === '"hello world"' && token.kind === 'string',
-        ),
+        stringTokens.find((token) => token.value === '"hello world"'),
       ).not.toBeFalsy();
       expect(
-        stringTokens.find(
-          (token) => token.value === "'yeah'" && token.kind === 'string',
-        ),
+        stringTokens.find((token) => token.value === "'yeah'"),
       ).not.toBeFalsy();
     });
     it('can tokenize number', () => {
@@ -84,29 +75,19 @@ describe('tokenizer', () => {
       );
       const numberTokens = tokens.filter((token) => token.kind === 'number');
       expect(
-        numberTokens.find(
-          (token) => token.value === '123' && token.kind === 'number',
-        ),
+        numberTokens.find((token) => token.value === '123'),
       ).not.toBeFalsy();
       expect(
-        numberTokens.find(
-          (token) => token.value === '0xff' && token.kind === 'number',
-        ),
+        numberTokens.find((token) => token.value === '0xff'),
       ).not.toBeFalsy();
       expect(
-        numberTokens.find(
-          (token) => token.value === '0o77' && token.kind === 'number',
-        ),
+        numberTokens.find((token) => token.value === '0o77'),
       ).not.toBeFalsy();
       expect(
-        numberTokens.find(
-          (token) => token.value === '1.23' && token.kind === 'number',
-        ),
+        numberTokens.find((token) => token.value === '1.23'),
       ).not.toBeFalsy();
       expect(
-        numberTokens.find(
-          (token) => token.value === '1e3' && token.kind === 'number',
-        ),
+        numberTokens.find((token) => token.value === '1e3'),
       ).not.toBeFalsy();
     });
     it('can tokenize bool', () => {
@@ -119,14 +100,10 @@ describe('tokenizer', () => {
       );
       const boolTokens = tokens.filter((token) => token.kind === 'bool');
       expect(
-        boolTokens.find(
-          (token) => token.value === 'true' && token.kind === 'bool',
-        ),
+        boolTokens.find((token) => token.value === 'true'),
       ).not.toBeFalsy();
       expect(
-        boolTokens.find(
-          (token) => token.value === 'false' && token.kind === 'bool',
-        ),
+        boolTokens.find((token) => token.value === 'false'),
       ).not.toBeFalsy();
     });
     it('can tokenize operator', () => {
@@ -188,9 +165,7 @@ describe('tokenizer', () => {
       );
       operators.forEach((operator) => {
         expect(
-          operatorTokens.find(
-            (token) => token.value === operator && token.kind === 'operator',
-          ),
+          operatorTokens.find((token) => token.value === operator),
         ).not.toBeFalsy();
       });
     });
@@ -214,9 +189,7 @@ describe('tokenizer', () => {
       expect(functionTokens.length).toBe(functionNames.length);
       functionNames.forEach((name) => {
         expect(
-          functionTokens.find(
-            (token) => token.value === name && token.kind === 'function',
-          ),
+          functionTokens.find((token) => token.value === name),
         ).not.toBeFalsy();
       });
     });
