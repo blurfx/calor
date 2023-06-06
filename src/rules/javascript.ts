@@ -34,7 +34,7 @@ const javascriptRules: ParseRule[] = [
   {
     kind: 'function',
     pattern:
-      /[a-zA-Z$_][\w$_]*(?=\s*((\?\.)?\s*\(|=\s*(\(?[\w, {}\[\])]+\)? *=>|function\b)))/g,
+      /(?!function\b)\b[a-zA-Z$_][\w$_]*(?=\s*((\?\.)?\s*\(|=\s*(\(?[\w, {}\[\])]+\)? *=>|function\b)))/g,
   },
 ];
 

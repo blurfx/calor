@@ -211,6 +211,7 @@ describe('tokenizer', () => {
       const functionTokens = tokens.filter(
         (token) => token.kind === 'function',
       );
+      expect(functionTokens.length).toBe(functionNames.length);
       functionNames.forEach((name) => {
         expect(
           functionTokens.find(
