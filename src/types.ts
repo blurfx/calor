@@ -6,9 +6,17 @@ export type SegmentKind =
   | 'bool'
   | 'comment'
   | 'operator'
-  | 'function';
+  | 'function'
+  | 'symbol'
+  | 'template_literal';
+
+export interface CustomPattern {
+  lastIndex: number;
+  exec: (code: string) => RegExpExecArray | null;
+}
 
 export type ParseRule = {
-  kind: SegmentKind;
-  pattern: RegExp;
+  kind: Omit<SegmentKind, 'plain'>;
+  pattern: RegExp | CustomPattern;
+  recursiveMatch?: boolean;
 };

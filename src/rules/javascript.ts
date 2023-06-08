@@ -1,4 +1,28 @@
-import { ParseRule } from '../types';
+import type { ParseRule, CustomPattern } from '../types';
+
+class TemplateLiteralParser implements CustomPattern {
+  lastIndex: number = 0;
+  exec(code: string): RegExpExecArray | null {
+    for (let i = this.lastIndex; i < code.length; i++) {
+      if (code[i - 1] !== '\\' && code[i] === '$' && code[i + 1] === '{') {
+        const index = i;
+        i += 2;
+        for (; i < code.length - 2; i++) {
+          if (code[i] === '}') {
+            break;
+          }
+        }
+        this.lastIndex = i + 1;
+        const matchArray = [] as unknown as RegExpExecArray;
+        matchArray['0'] = code.slice(index, this.lastIndex);
+        (matchArray as RegExpExecArray).index = index;
+        (matchArray as RegExpExecArray).input = code;
+        return matchArray as RegExpExecArray;
+      }
+    }
+    return null;
+  }
+}
 
 const javascriptRules: ParseRule[] = [
   {
@@ -15,13 +39,14 @@ const javascriptRules: ParseRule[] = [
     pattern: /(["'])(\\[^]|(?!\1)[^\r\n\\])*\1/g,
   },
   {
-    kind: 'number',
-    pattern:
-      /\b(0[xX][\da-fA-F_]+|0[o|O][0-7_]+|[\d_]*\.?[\d_]+([eE][+-]?[\d]+)?)\b/g,
+    kind: 'template_literal',
+    pattern: new TemplateLiteralParser(),
+    recursiveMatch: true,
   },
   {
     kind: 'number',
-    pattern: /\b(NaN)\b/g,
+    pattern:
+      /\b(0[xX][\da-fA-F_]+|0[o|O][0-7_]+|[\d_]*\.?[\d_]+([eE][+-]?[\d]+)?|NaN)\b/g,
   },
   {
     kind: 'operator',
@@ -35,6 +60,10 @@ const javascriptRules: ParseRule[] = [
     kind: 'function',
     pattern:
       /(?!function\b)\b[a-zA-Z$_][\w$_]*(?=\s*((\?\.)?\s*\(|=\s*(\(?[\w, {}\[\])]+\)? *=>|function\b)))/g,
+  },
+  {
+    kind: 'symbol',
+    pattern: /\b[a-zA-Z$_][\w$_]*\b/g,
   },
 ];
 

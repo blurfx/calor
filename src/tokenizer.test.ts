@@ -3,7 +3,7 @@ import { tokenize } from './tokenizer';
 import javascriptRules from './rules/javascript';
 
 describe('tokenizer', () => {
-  describe('typescript', () => {
+  describe('javascript', () => {
     it('can tokenize comment', () => {
       const tokens = tokenize(
         `
@@ -70,25 +70,17 @@ describe('tokenizer', () => {
       const oct = 0o77;
       const float = 1.23;
       const exp = 1e3;
+      const nan = NaN;
     `,
         javascriptRules,
       );
       const numberTokens = tokens.filter((token) => token.kind === 'number');
-      expect(
-        numberTokens.find((token) => token.value === '123'),
-      ).not.toBeFalsy();
-      expect(
-        numberTokens.find((token) => token.value === '0xff'),
-      ).not.toBeFalsy();
-      expect(
-        numberTokens.find((token) => token.value === '0o77'),
-      ).not.toBeFalsy();
-      expect(
-        numberTokens.find((token) => token.value === '1.23'),
-      ).not.toBeFalsy();
-      expect(
-        numberTokens.find((token) => token.value === '1e3'),
-      ).not.toBeFalsy();
+      const numberValues = ['123', '0xff', '0o77', '1.23', '1e3', 'NaN'];
+      numberValues.forEach((value) => {
+        expect(
+          numberTokens.find((token) => token.value === value),
+        ).not.toBeFalsy();
+      });
     });
     it('can tokenize bool', () => {
       const tokens = tokenize(
@@ -192,6 +184,17 @@ describe('tokenizer', () => {
           functionTokens.find((token) => token.value === name),
         ).not.toBeFalsy();
       });
+    });
+    it('can tokenize template literal string', () => {
+      const tokens = tokenize(
+        'const hello = `hello ${name}`;',
+        javascriptRules,
+      );
+      const literalTemplateTokens = tokens.filter(
+        (token) => token.kind === 'template_literal',
+      );
+      expect(literalTemplateTokens.length).toBe(1);
+      expect(literalTemplateTokens[0].value).toBe('${name}');
     });
   });
 });

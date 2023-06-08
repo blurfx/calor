@@ -1,15 +1,16 @@
 import type { ParseRule } from './types';
-import { SegmentKind } from './types';
 
 type MatchedPattern = {
-  match: RegExpMatchArray;
-  kind: SegmentKind;
+  match: RegExpExecArray;
+  kind: ParseRule['kind'];
   lastIndex: number;
 };
-//
+
 export const tokenize = (code: string, rules: ParseRule[]) => {
   const tokens = [];
   const cachedPattern: MatchedPattern[] = [];
+  const regexp = /x/g;
+  regexp.exec('x');
   let current = 0;
   while (current < code.length) {
     let firstMatched: MatchedPattern | null = null;
