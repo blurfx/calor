@@ -1,5 +1,5 @@
 import { describe, it, assert } from 'vitest';
-import { detectLanguage } from './detect.ts';
+import { detectLanguage } from '../src/detect.ts';
 
 describe('language detection', () => {
   describe('javascript/typescript', () => {
