@@ -16,7 +16,12 @@ export interface CustomPattern {
 }
 
 export type ParseRule = {
-  kind: Omit<SegmentKind, 'plain'>;
+  kind: SegmentKind;
   pattern: RegExp | CustomPattern;
   recursiveMatch?: boolean;
+};
+
+export type Token = {
+  kind: SegmentKind;
+  value: string;
 };

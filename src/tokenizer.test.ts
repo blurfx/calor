@@ -187,14 +187,32 @@ describe('tokenizer', () => {
     });
     it('can tokenize template literal string', () => {
       const tokens = tokenize(
-        'const hello = `hello ${name}`;',
+        `const hello = \`hello \${name}\`;
+        const world = \`\${foo.bar()}\`;
+        const number = \`\${1234}\`
+        `,
         javascriptRules,
       );
-      const literalTemplateTokens = tokens.filter(
-        (token) => token.kind === 'template_literal',
-      );
-      expect(literalTemplateTokens.length).toBe(1);
-      expect(literalTemplateTokens[0].value).toBe('${name}');
+      expect(
+        tokens.some(
+          (token) => token.value === 'name' && token.kind === 'symbol',
+        ),
+      ).toBe(true);
+      expect(
+        tokens.some(
+          (token) => token.value === 'foo' && token.kind === 'symbol',
+        ),
+      ).toBe(true);
+      expect(
+        tokens.some(
+          (token) => token.value === 'bar' && token.kind === 'function',
+        ),
+      ).toBe(true);
+      expect(
+        tokens.some(
+          (token) => token.value === '1234' && token.kind === 'number',
+        ),
+      ).toBe(true);
     });
   });
 });

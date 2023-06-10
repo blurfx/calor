@@ -1,13 +1,15 @@
 import type { ParseRule } from './types';
+import { Token } from './types';
 
 type MatchedPattern = {
   match: RegExpExecArray;
   kind: ParseRule['kind'];
   lastIndex: number;
+  recursiveMatch?: boolean;
 };
 
-export const tokenize = (code: string, rules: ParseRule[]) => {
-  const tokens = [];
+export const tokenize = (code: string, rules: ParseRule[]): Token[] => {
+  const tokens: Token[] = [];
   const cachedPattern: MatchedPattern[] = [];
   const regexp = /x/g;
   regexp.exec('x');
@@ -25,6 +27,7 @@ export const tokenize = (code: string, rules: ParseRule[]) => {
           match,
           kind: rules[i].kind,
           lastIndex: rules[i].pattern.lastIndex,
+          recursiveMatch: rules[i].recursiveMatch,
         };
       }
 
@@ -42,16 +45,31 @@ export const tokenize = (code: string, rules: ParseRule[]) => {
     }
 
     const pre = code.slice(current, firstMatched.match.index!);
-    tokens.push({
-      kind: 'plain',
-      value: pre,
-    });
+    if (pre.length > 0) {
+      tokens.push({
+        kind: 'plain',
+        value: pre,
+      });
+    }
     current = firstMatched.lastIndex;
-    const post = firstMatched.match[0];
-    tokens.push({
-      kind: firstMatched.kind,
-      value: post,
-    });
+    if (firstMatched.recursiveMatch === true) {
+      tokens.push(
+        ...tokenize(
+          firstMatched.match[0],
+          rules.filter((rule) => rule.recursiveMatch !== true),
+        ),
+      );
+    } else {
+      const post = firstMatched.match[0];
+      tokens.push({
+        kind: firstMatched.kind,
+        value: post,
+      });
+    }
   }
+  tokens.push({
+    kind: 'plain',
+    value: code.slice(current),
+  });
   return tokens;
 };
