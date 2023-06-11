@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { tokenize } from '../../src/tokenizer';
 import javascriptRules from '../../src/rules/javascript';
+import { highlight } from '../../src/highlighter';
 
 describe('javascript tokenizer', () => {
   it('can tokenize comment', () => {
@@ -198,5 +199,41 @@ describe('javascript tokenizer', () => {
     expect(
       tokens.some((token) => token.value === '1234' && token.kind === 'number'),
     ).toBe(true);
+  });
+  it('temp', () => {
+    const code = `
+const someObject = {
+  someProperty: \`some value \`\${foo.bar() + 1234}\`\`,
+  someMethod() {
+    console.log('Hello, world!');
+  },
+  ['computed' + 'Property']: 'computed value'
+};
+
+class SomeClass {
+  constructor() {
+    this.someProperty = 'some value';
+  }
+
+  someMethod() {
+    console.log('Hello, world!');
+  }
+}
+
+function* fibonacci() {
+  let a = 0, b = 1;
+  while (true) {
+    yield a;
+    [a, b] = [b, a + b];
+  }
+}
+
+const fib = fibonacci();
+console.log(fib.next().value);
+console.log(fib.next().value);
+console.log(fib.next().value);
+};
+    `;
+    console.log(highlight(code));
   });
 });

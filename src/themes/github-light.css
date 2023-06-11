@@ -1,0 +1,36 @@
+.chill-plain {
+    color: #24292e;
+}
+
+.chill-string {
+    color: #d73a49;
+}
+
+.chill-keyword {
+    color: #6f42c1;
+}
+
+.chill-number {
+    color: #005cc5;
+}
+
+.chill-bool {
+    color: #d73a49;
+}
+
+.chill-comment {
+    color: #6a737d;
+    font-style: italic;
+}
+
+.chill-operator {
+    color: #d73a49;
+}
+
+.chill-function {
+    color: #005cc5;
+}
+
+.chill-symbol {
+    color: #24292e;
+}
