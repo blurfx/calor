@@ -1,8 +1,16 @@
 {
-  "name": "chill",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@calor/core",
+  "version": "0.0.1",
   "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./themes/*": "./dist/themes/*"
+  },
   "scripts": {
     "build": "tsup",
     "test": "vitest",

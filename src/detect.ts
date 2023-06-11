@@ -1,7 +1,4 @@
 import { Language } from './constants.ts';
-import javascriptRules from './rules/javascript';
-import { ParseRule } from './types';
-import typescriptRules from './rules/typescript';
 
 const keywordWeights: Record<Language, Array<[RegExp, number]>> = {
   javascript: [
@@ -37,13 +34,4 @@ export const detectLanguage = (code: string): string => {
     return 'text';
   }
   return lang;
-};
-
-const Rules: Record<string, ParseRule[]> = {
-  javascript: javascriptRules,
-  typescript: typescriptRules,
-};
-
-export const getParseRule = (lang: string) => {
-  return Rules[lang];
 };

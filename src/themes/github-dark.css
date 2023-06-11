@@ -1,32 +1,32 @@
-.chill-wrapper {
+.calor-wrapper {
     background-color: #0d1117;
 }
 
-.chill-plain, .chill-symbol {
+.calor-plain, .calor-symbol {
     color: #e6edf3;
 }
 
-.chill-keyword, .chill-bool, .chill-operator {
+.calor-keyword, .calor-bool, .calor-operator {
     color: #ff7b72;
 }
 
-.chill-number, .chill-function {
+.calor-number, .calor-function {
     color: #79c0ff;
 }
 
-.chill-comment {
+.calor-comment {
     color: #8b949e;
     font-style: italic;
 }
 
-.chill-type {
+.calor-type {
     color: #f89859;
 }
 
-.chill-class {
+.calor-class {
     color: #d2a8ff;
 }
 
-.chill-string {
+.calor-string {
     color: #a5d6ff;
 }
