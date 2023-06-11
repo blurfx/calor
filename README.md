@@ -5,7 +5,7 @@ chill is a fast syntax highlighter and tokenizer.
 ## Language support
 
 - [x] JavaScript
-- [ ] TypeScript
+- [x] TypeScript
 - [ ] Go
 - [ ] Python
 - [ ] C

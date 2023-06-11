@@ -30,9 +30,14 @@ const javascriptRules: ParseRule[] = [
     pattern: /\/\/.*\n?|\/\*((?!\*\/)[^])*(\*\/)?/g,
   },
   {
+    kind: 'class',
+    pattern: /\b(class)(\s+)([a-zA-Z$_][\w$_]*)/g,
+    matchHints: ['keyword', 'plain', 'class'],
+  },
+  {
     kind: 'keyword',
     pattern:
-      /\b(await|break|case|catch|class|const|continue|debugger|default|delete|do|else|export|extends|finally|for|function|if|import|in|instanceof|let|new|null|return|static|super|switch|this|throw|try|typeof|var|void|while|with|yield)\b/g,
+      /\b(await|break|case|catch|class|const|continue|debugger|default|delete|do|else|export|extends|finally|for|function|if|import|in|instanceof|let|new|null|return|static|super|switch|this|throw|try|typeof|var|void|while|with|yield|of)\b/g,
   },
   {
     kind: 'string',
@@ -60,6 +65,10 @@ const javascriptRules: ParseRule[] = [
     kind: 'function',
     pattern:
       /(?!function\b)\b[a-zA-Z$_][\w$_]*(?=\s*((\?\.)?\s*\(|=\s*(\(?[\w, {}\[\])]+\)? *=>|function\b)))/g,
+  },
+  {
+    kind: 'class',
+    pattern: /\b[A-Z$_][\w$_]*\b/g,
   },
   {
     kind: 'symbol',

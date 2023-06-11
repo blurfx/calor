@@ -1,6 +1,7 @@
 import { Language } from './constants.ts';
 import javascriptRules from './rules/javascript';
 import { ParseRule } from './types';
+import typescriptRules from './rules/typescript';
 
 const keywordWeights: Record<Language, Array<[RegExp, number]>> = {
   javascript: [
@@ -11,7 +12,7 @@ const keywordWeights: Record<Language, Array<[RegExp, number]>> = {
   ],
   typescript: [
     [
-      /\b(console|await|async|function|export|import|this|class|for|let|const|map|join|require|type|implements|interface|declare|namespace)\b/g,
+      /\b(console|await|async|function|export|import|this|class|for|let|infer|const|map|join|require|type|implements|interface|declare|namespace)\b/g,
       10,
     ],
   ],
@@ -40,7 +41,7 @@ export const detectLanguage = (code: string): string => {
 
 const Rules: Record<string, ParseRule[]> = {
   javascript: javascriptRules,
-  typescript: javascriptRules,
+  typescript: typescriptRules,
 };
 
 export const getParseRule = (lang: string) => {

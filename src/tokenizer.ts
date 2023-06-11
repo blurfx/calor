@@ -3,9 +3,7 @@ import { Token } from './types';
 
 type MatchedPattern = {
   match: RegExpExecArray;
-  kind: ParseRule['kind'];
-  lastIndex: number;
-  recursiveMatch?: boolean;
+  rule: ParseRule;
 };
 
 export const tokenize = (code: string, rules: ParseRule[]): Token[] => {
@@ -25,9 +23,7 @@ export const tokenize = (code: string, rules: ParseRule[]): Token[] => {
         }
         cachedPattern[i] = {
           match,
-          kind: rules[i].kind,
-          lastIndex: rules[i].pattern.lastIndex,
-          recursiveMatch: rules[i].recursiveMatch,
+          rule: rules[i],
         };
       }
 
@@ -51,8 +47,8 @@ export const tokenize = (code: string, rules: ParseRule[]): Token[] => {
         value: pre,
       });
     }
-    current = firstMatched.lastIndex;
-    if (firstMatched.recursiveMatch === true) {
+    current = firstMatched.rule.pattern.lastIndex;
+    if (firstMatched.rule.recursiveMatch === true) {
       tokens.push(
         ...tokenize(
           firstMatched.match[0],
@@ -60,11 +56,22 @@ export const tokenize = (code: string, rules: ParseRule[]): Token[] => {
         ),
       );
     } else {
-      const post = firstMatched.match[0];
-      tokens.push({
-        kind: firstMatched.kind,
-        value: post,
-      });
+      if (firstMatched.rule.matchHints == null) {
+        const post = firstMatched.match[0];
+        tokens.push({
+          kind: firstMatched.rule.kind,
+          value: post,
+        });
+      } else {
+        for (let i = 1; i < firstMatched.match.length; i++) {
+          if (firstMatched.match[i] != null) {
+            tokens.push({
+              kind: firstMatched.rule.matchHints[i - 1],
+              value: firstMatched.match[i],
+            });
+          }
+        }
+      }
     }
   }
   tokens.push({

@@ -8,7 +8,9 @@ export type SegmentKind =
   | 'operator'
   | 'function'
   | 'symbol'
-  | 'template_literal';
+  | 'class'
+  | 'template_literal'
+  | 'type';
 
 export interface CustomPattern {
   lastIndex: number;
@@ -19,6 +21,7 @@ export type ParseRule = {
   kind: SegmentKind;
   pattern: RegExp | CustomPattern;
   recursiveMatch?: boolean;
+  matchHints?: SegmentKind[];
 };
 
 export type Token = {

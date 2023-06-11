@@ -1,21 +1,13 @@
-.chill-plain {
+.chill-plain, .chill-symbol {
     color: #24292e;
 }
 
-.chill-string {
+.chill-string, .chill-keyword, .chill-bool, .chill-operator {
     color: #d73a49;
 }
 
-.chill-keyword {
-    color: #6f42c1;
-}
-
-.chill-number {
+.chill-number, .chill-function {
     color: #005cc5;
-}
-
-.chill-bool {
-    color: #d73a49;
 }
 
 .chill-comment {
@@ -23,14 +15,10 @@
     font-style: italic;
 }
 
-.chill-operator {
-    color: #d73a49;
+.chill-type {
+    color: #e36209;
 }
 
-.chill-function {
-    color: #005cc5;
-}
-
-.chill-symbol {
-    color: #24292e;
+.chill-class {
+    color: #6f42c1;
 }

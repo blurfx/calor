@@ -5,7 +5,6 @@ export const highlight = (code: string, language?: string): string => {
   if (language == null) {
     language = detectLanguage(code);
   }
-
   const tokens = tokenize(code, getParseRule(language));
   const html = tokens.reduce((acc, token) => {
     acc += `<span class="chill-${token.kind}">${token.value}</span>`;

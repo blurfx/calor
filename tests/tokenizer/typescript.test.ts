@@ -1,8 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { tokenize } from '../../src/tokenizer';
-import javascriptRules from '../../src/rules/javascript';
+import typescriptRules from '../../src/rules/typescript';
+import { highlight } from '../../src/highlighter';
 
-describe('javascript tokenizer', () => {
+describe('typescript tokenizer', () => {
   it('can tokenize comment', () => {
     const tokens = tokenize(
       `
@@ -12,7 +13,7 @@ describe('javascript tokenizer', () => {
           this is multiline comment
         */
         `,
-      javascriptRules,
+      typescriptRules,
     );
     const commentTokens = tokens.filter((token) => token.kind === 'comment');
     expect(commentTokens.length).toBe(2);
@@ -28,15 +29,25 @@ describe('javascript tokenizer', () => {
   it('can tokenize keyword', () => {
     const tokens = tokenize(
       `
+      type GetReturnType<Type> = Type extends (...args: never[]) => infer Return ? Return : never;
+  
       function foo() {
         const str = "hello world";
         let val = true;
         return 0;
       }
     `,
-      javascriptRules,
+      typescriptRules,
     );
-    const keywords = ['function', 'const', 'let', 'return'];
+    const keywords = [
+      'function',
+      'const',
+      'let',
+      'return',
+      'type',
+      'extends',
+      'infer',
+    ];
     keywords.forEach((keyword) => {
       expect(
         tokens.find(
@@ -51,7 +62,7 @@ describe('javascript tokenizer', () => {
       const str = "hello world";
       'yeah';
     `,
-      javascriptRules,
+      typescriptRules,
     );
     const stringTokens = tokens.filter((token) => token.kind === 'string');
     expect(
@@ -71,7 +82,7 @@ describe('javascript tokenizer', () => {
       const exp = 1e3;
       const nan = NaN;
     `,
-      javascriptRules,
+      typescriptRules,
     );
     const numberTokens = tokens.filter((token) => token.kind === 'number');
     const numberValues = ['123', '0xff', '0o77', '1.23', '1e3', 'NaN'];
@@ -87,7 +98,7 @@ describe('javascript tokenizer', () => {
       const bool = true;
       const bool2 = false;
     `,
-      javascriptRules,
+      typescriptRules,
     );
     const boolTokens = tokens.filter((token) => token.kind === 'bool');
     expect(boolTokens.find((token) => token.value === 'true')).not.toBeFalsy();
@@ -117,7 +128,7 @@ describe('javascript tokenizer', () => {
         const bool17 = 1 ?? 2;
         const bool18 = 1 ??= 2;
         `,
-      javascriptRules,
+      typescriptRules,
     );
     const operators = [
       '=',
@@ -165,7 +176,7 @@ describe('javascript tokenizer', () => {
       const fn4 = function() {}
       fn5 = () => {};
       `,
-      javascriptRules,
+      typescriptRules,
     );
     const functionNames = ['fn1', 'fn2', 'fn3', 'fn4', 'fn5'];
     const functionTokens = tokens.filter((token) => token.kind === 'function');
@@ -182,7 +193,7 @@ describe('javascript tokenizer', () => {
         const world = \`\${foo.bar()}\`;
         const number = \`\${1234}\`
         `,
-      javascriptRules,
+      typescriptRules,
     );
     expect(
       tokens.some((token) => token.value === 'name' && token.kind === 'symbol'),
@@ -198,5 +209,42 @@ describe('javascript tokenizer', () => {
     expect(
       tokens.some((token) => token.value === '1234' && token.kind === 'number'),
     ).toBe(true);
+  });
+  it('can tokenize type', () => {
+    const tokens = tokenize(
+      `
+      const a: string = 'hello';
+      const b: number = 123;
+      const c: boolean = true;
+      const d: any = 123;
+      const e: unknown = 123;
+      const f: never = 123;
+      const g: void = 123;
+      const h: object = 123;
+      const i: null = 123;
+      const j: undefined = 123;
+      const k: symbol = 123;
+      const l: bigint = 123;
+     `,
+      typescriptRules,
+    );
+    const types = [
+      'string',
+      'number',
+      'boolean',
+      'any',
+      'unknown',
+      'never',
+      'void',
+      'object',
+      'null',
+      'undefined',
+      'symbol',
+      'bigint',
+    ];
+    const typeTokens = tokens.filter((token) => token.kind === 'type');
+    types.forEach((type) => {
+      expect(typeTokens.some((token) => token.value === type)).toBe(true);
+    });
   });
 });
