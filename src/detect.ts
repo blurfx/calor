@@ -12,7 +12,7 @@ const keywordWeights: Record<Language, Array<[RegExp, number]>> = {
   ],
   typescript: [
     [
-      /\b(console|await|async|function|export|import|this|class|for|let|infer|const|map|join|require|type|implements|interface|declare|namespace)\b/g,
+      /\b(console|await|async|function|export|import|this|class|for|let|infer|const|map|join|require|type|implements|interface|declare|namespace|unknown|bigint|any|void|number|boolean|string|object|never|enum|unique symbol|symbol)\b/g,
       10,
     ],
   ],

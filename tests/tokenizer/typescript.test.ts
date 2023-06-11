@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { tokenize } from '../../src/tokenizer';
 import typescriptRules from '../../src/rules/typescript';
-import { highlight } from '../../src/highlighter';
 
 describe('typescript tokenizer', () => {
   it('can tokenize comment', () => {

@@ -1,32 +1,32 @@
 .chill-wrapper {
-    background-color: #fff;
+    background-color: #0d1117;
 }
 
 .chill-plain, .chill-symbol {
-    color: #24292e;
+    color: #e6edf3;
 }
 
 .chill-keyword, .chill-bool, .chill-operator {
-    color: #cf222e;
+    color: #ff7b72;
 }
 
 .chill-number, .chill-function {
-    color: #0550ae;
+    color: #79c0ff;
 }
 
 .chill-comment {
-    color: #6e7781;
+    color: #8b949e;
     font-style: italic;
 }
 
 .chill-type {
-    color: #e36209;
+    color: #f89859;
 }
 
 .chill-class {
-    color: #8250df;
+    color: #d2a8ff;
 }
 
 .chill-string {
-    color: #4d804e;
+    color: #a5d6ff;
 }
