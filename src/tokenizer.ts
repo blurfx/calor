@@ -9,8 +9,6 @@ type MatchedPattern = {
 export const tokenize = (code: string, rules: ParseRule[]): Token[] => {
   const tokens: Token[] = [];
   const cachedPattern: MatchedPattern[] = [];
-  const regexp = /x/g;
-  regexp.exec('x');
   let current = 0;
   while (current < code.length) {
     let firstMatched: MatchedPattern | null = null;
@@ -48,12 +46,9 @@ export const tokenize = (code: string, rules: ParseRule[]): Token[] => {
       });
     }
     current = firstMatched.rule.pattern.lastIndex;
-    if (firstMatched.rule.recursiveMatch === true) {
+    if (firstMatched.rule.customTokenizer != null) {
       tokens.push(
-        ...tokenize(
-          firstMatched.match[0],
-          rules.filter((rule) => rule.recursiveMatch !== true),
-        ),
+        ...firstMatched.rule.customTokenizer.parse(firstMatched.match[0]),
       );
     } else {
       if (firstMatched.rule.matchHints == null) {

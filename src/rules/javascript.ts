@@ -1,30 +1,43 @@
-import type { ParseRule, CustomPattern } from '../types';
+import type { ParseRule, CustomPattern, Token } from '../types';
+import { deepCopy } from '../utils';
+import { tokenize } from '../tokenizer';
 
 class TemplateLiteralParser implements CustomPattern {
-  lastIndex: number = 0;
-  exec(code: string): RegExpExecArray | null {
-    for (let i = this.lastIndex; i < code.length; i++) {
+  #parseRules: ParseRule[];
+  constructor(parseRules: ParseRule[]) {
+    this.#parseRules = parseRules;
+  }
+  parse(code: string): Token[] {
+    const tokens: Token[] = [];
+    let lastIndex = 0;
+    for (let i = lastIndex; i < code.length; i++) {
       if (code[i - 1] !== '\\' && code[i] === '$' && code[i + 1] === '{') {
         const index = i;
         i += 2;
-        for (; i < code.length - 2; i++) {
+        for (; i < code.length - 1; i++) {
           if (code[i] === '}') {
             break;
           }
         }
-        this.lastIndex = i + 1;
-        const matchArray = [] as unknown as RegExpExecArray;
-        matchArray['0'] = code.slice(index, this.lastIndex);
-        (matchArray as RegExpExecArray).index = index;
-        (matchArray as RegExpExecArray).input = code;
-        return matchArray as RegExpExecArray;
+        tokens.push({
+          kind: 'string',
+          value: code.slice(lastIndex, index),
+        });
+        lastIndex = i + 1;
+        tokens.push(
+          ...tokenize(code.slice(index, lastIndex), this.#parseRules),
+        );
+        tokens.push({
+          kind: 'string',
+          value: code.slice(lastIndex),
+        });
       }
     }
-    return null;
+    return tokens;
   }
 }
 
-const javascriptRules: ParseRule[] = [
+export const javascriptBaseRule: ParseRule[] = [
   {
     kind: 'comment',
     pattern: /\/\/.*\n?|\/\*((?!\*\/)[^])*(\*\/)?/g,
@@ -42,11 +55,6 @@ const javascriptRules: ParseRule[] = [
   {
     kind: 'string',
     pattern: /(["'])(\\[^]|(?!\1)[^\r\n\\])*\1/g,
-  },
-  {
-    kind: 'template_literal',
-    pattern: new TemplateLiteralParser(),
-    recursiveMatch: true,
   },
   {
     kind: 'number',
@@ -75,5 +83,13 @@ const javascriptRules: ParseRule[] = [
     pattern: /\b[a-zA-Z$_][\w$_]*\b/g,
   },
 ];
+
+const javascriptRules = [...deepCopy(javascriptBaseRule)];
+
+javascriptRules.push({
+  kind: 'template_literal',
+  pattern: /(`)(\\[^]|(?!\1)[^\r\n\\])*\1/g,
+  customTokenizer: new TemplateLiteralParser(deepCopy(javascriptRules)),
+});
 
 export default javascriptRules;

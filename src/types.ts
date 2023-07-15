@@ -13,14 +13,13 @@ export type SegmentKind =
   | 'type';
 
 export interface CustomPattern {
-  lastIndex: number;
-  exec: (code: string) => RegExpExecArray | null;
+  parse(code: string): Token[];
 }
 
 export type ParseRule = {
   kind: SegmentKind;
-  pattern: RegExp | CustomPattern;
-  recursiveMatch?: boolean;
+  pattern: RegExp;
+  customTokenizer?: CustomPattern;
   matchHints?: SegmentKind[];
 };
 
