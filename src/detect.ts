@@ -13,6 +13,7 @@ const keywordWeights: Record<Language, Array<[RegExp, number]>> = {
       10,
     ],
   ],
+  golang: [[/\b(defer|go|chan|fmt|select|package)\b/g, 100]],
 };
 
 export const detectLanguage = (code: string): string => {
