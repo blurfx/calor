@@ -27,12 +27,12 @@ class TemplateLiteralParser implements CustomPattern {
         tokens.push(
           ...tokenize(code.slice(index, lastIndex), this.#parseRules),
         );
-        tokens.push({
-          kind: 'string',
-          value: code.slice(lastIndex),
-        });
       }
     }
+    tokens.push({
+      kind: 'string',
+      value: code.slice(lastIndex),
+    });
     return tokens;
   }
 }
