@@ -88,7 +88,7 @@ const javascriptRules = [...deepCopy(javascriptBaseRule)];
 
 javascriptRules.push({
   kind: 'template_literal',
-  pattern: /(`)(\\[^]|(?!\1)[^\r\n\\])*\1/g,
+  pattern: /(`)(\\[^]|(?!\1)[^])*\1/g,
   customTokenizer: new TemplateLiteralParser(deepCopy(javascriptRules)),
 });
 

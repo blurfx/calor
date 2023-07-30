@@ -30,16 +30,16 @@ export const deepCopy = <T>(obj: T): T => {
 };
 
 export const escapeHTML = (text: string) => {
-  return text.replace(/[&<>"']/g, (match) => {
+  return text.replace(/[&<>]/g, (match) => {
     switch (match) {
-    case '&':
-      return '&amp;';
-    case '<':
-      return '&lt;';
-    case '>':
-      return '&gt;';
-    default:
-      return match;
+      case '&':
+        return '&amp;';
+      case '<':
+        return '&lt;';
+      case '>':
+        return '&gt;';
+      default:
+        return match;
     }
   });
 };

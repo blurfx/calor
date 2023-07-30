@@ -10,7 +10,10 @@
     "max-len": "off",
     "indent": [
       "error",
-      2
+      2,
+      {
+        "SwitchCase": 1
+      }
     ],
     "import/extensions": "off",
     "import/prefer-default-export": "off",

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { tokenize } from '../../src/tokenizer';
+import { tokenize } from '../../src';
 import typescriptRules from '../../src/rules/typescript';
 
 describe('typescript tokenizer', () => {
