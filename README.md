@@ -63,7 +63,7 @@ You can check the [issues](https://github.com/blurfx/calor/issues?q=is%3Aissue+l
 
 - [x] JavaScript
 - [x] TypeScript
-- [ ] Go
+- [x] Go
 - [ ] Python
 - [ ] C
 - [ ] C++
