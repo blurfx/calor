@@ -1,4 +1,4 @@
-export default {
-  'src/**/*.{ts,tsx}': () => 'pnpm typecheck',
-  'src/**/*.{js,jsx,ts,tsx}': ['prettier --write', 'eslint --fix'],
+module.exports = {
+  'packages/**/*.{ts,tsx}': () => 'pnpm typecheck',
+  'packages/**/*.{js,jsx,ts,tsx}': ['prettier --write', 'eslint --fix'],
 };

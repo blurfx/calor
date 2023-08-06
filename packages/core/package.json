@@ -1,0 +1,26 @@
+{
+  "name": "@calor/core",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest",
+    "pre-commit": "lint-staged",
+    "typecheck": "tsc --noEmit --project ."
+  },
+  "devDependencies": {
+    "eslint-config-calor": "workspace:*",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.2",
+    "vitest": "^0.31.0"
+  }
+}

@@ -1,7 +1,5 @@
-import { detectLanguage } from './detect';
-import { tokenize } from './tokenizer';
-import { getParseRule } from './rules';
-import { escapeHTML } from './utils.ts';
+import { detectLanguage, tokenize, getParseRule } from '@calor/core';
+import { escapeHTML } from './utils';
 
 export const highlight = (code: string, language?: string): string => {
   if (language == null) {

@@ -1,0 +1,31 @@
+{
+  "name": "@calor/highlighter",
+  "version": "0.0.1",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./themes/*": "./dist/themes/*"
+  },
+  "scripts": {
+    "build": "tsup",
+    "pre-commit": "lint-staged",
+    "typecheck": "tsc --noEmit --project ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@calor/core": "workspace:^",
+    "eslint-config-calor": "workspace:*",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.2"
+  },
+  "peerDependencies": {
+    "@calor/core": "^0.0.1"
+  }
+}
