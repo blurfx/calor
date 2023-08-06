@@ -7,8 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "pre-commit": "pnpm run --filter \"@calor/*\" pre-commit",
-    "ci:version": "changeset version && pnpm install --no-frozen-lockfile",
-    "ci:publish": "pnpm build && changeset publish && pnpm install",
+    "lint": "pnpm run --filter \"@calor/*\" build && pnpm run --filter \"@calor/*\" lint",
+    "ci:version": "changeset version",
+    "ci:publish": "pnpm run --filter \"@calor/*\" build && changeset publish",
     "prepare": "husky install"
   },
   "keywords": [],

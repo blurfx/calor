@@ -1,32 +1,36 @@
 .calor-wrapper {
-    background-color: #fff;
+  background-color: #fff;
 }
 
-.calor-plain, .calor-symbol {
-    color: #24292e;
+.calor-plain,
+.calor-symbol {
+  color: #24292e;
 }
 
-.calor-keyword, .calor-bool, .calor-operator {
-    color: #cf222e;
+.calor-keyword,
+.calor-bool,
+.calor-operator {
+  color: #cf222e;
 }
 
-.calor-number, .calor-function {
-    color: #0550ae;
+.calor-number,
+.calor-function {
+  color: #0550ae;
 }
 
 .calor-comment {
-    color: #6e7781;
-    font-style: italic;
+  color: #6e7781;
+  font-style: italic;
 }
 
 .calor-type {
-    color: #e36209;
+  color: #e36209;
 }
 
 .calor-class {
-    color: #8250df;
+  color: #8250df;
 }
 
 .calor-string {
-    color: #4d804e;
+  color: #4d804e;
 }

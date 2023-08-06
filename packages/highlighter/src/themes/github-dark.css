@@ -1,32 +1,36 @@
 .calor-wrapper {
-    background-color: #0d1117;
+  background-color: #0d1117;
 }
 
-.calor-plain, .calor-symbol {
-    color: #e6edf3;
+.calor-plain,
+.calor-symbol {
+  color: #e6edf3;
 }
 
-.calor-keyword, .calor-bool, .calor-operator {
-    color: #ff7b72;
+.calor-keyword,
+.calor-bool,
+.calor-operator {
+  color: #ff7b72;
 }
 
-.calor-number, .calor-function {
-    color: #79c0ff;
+.calor-number,
+.calor-function {
+  color: #79c0ff;
 }
 
 .calor-comment {
-    color: #8b949e;
-    font-style: italic;
+  color: #8b949e;
+  font-style: italic;
 }
 
 .calor-type {
-    color: #f89859;
+  color: #f89859;
 }
 
 .calor-class {
-    color: #d2a8ff;
+  color: #d2a8ff;
 }
 
 .calor-string {
-    color: #a5d6ff;
+  color: #a5d6ff;
 }

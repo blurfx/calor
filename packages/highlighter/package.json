@@ -14,7 +14,10 @@
   "scripts": {
     "build": "tsup",
     "pre-commit": "lint-staged",
-    "typecheck": "tsc --noEmit --project ."
+    "typecheck": "tsc --noEmit --project .",
+    "dry:eslint": "eslint --ext .ts,.tsx ./src",
+    "dry:prettier": "prettier --check ./src",
+    "lint": "pnpm run typecheck && pnpm run dry:eslint && pnpm run dry:prettier"
   },
   "keywords": [],
   "author": "",
@@ -27,5 +30,8 @@
   },
   "peerDependencies": {
     "@calor/core": "^0.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
