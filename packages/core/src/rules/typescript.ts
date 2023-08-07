@@ -12,7 +12,7 @@ const typescriptRules: ParseRule[] = [
   {
     kind: 'keyword',
     pattern:
-      /\b(as|get|set|type|namespace|infer|interface|extends|public|private|protected|implements|declare|abstract|readonly)\b/g,
+      /\b(as|get|set|type|namespace|infer|interface|extends|public|private|protected|implements|declare|abstract|readonly|using)\b/g,
   },
   ...javascriptRules,
 ];
