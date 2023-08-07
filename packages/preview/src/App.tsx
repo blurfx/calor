@@ -1,8 +1,8 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import { highlight } from '@calor/highlighter';
-import lightTheme from '@calor/highlighter/themes/github-light.css';
-import darkTheme from '@calor/highlighter/themes/github-dark.css';
+import lightTheme from '@calor/highlighter/themes/github-light.css?inline';
+import darkTheme from '@calor/highlighter/themes/github-dark.css?inline';
 
 const exampleCode: Record<string, string> = {
   typescript: 'typescript.ts',

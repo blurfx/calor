@@ -1,6 +1,6 @@
 .idea
 .github
 .husky
-tests
-src
+**/tests
+**/src
 *.tgz
