@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { tokenize } from '../../src/tokenizer';
 import javascriptRules from '../../src/rules/javascript';
+import { detectLanguage } from '../../src';
 
 describe('javascript tokenizer', () => {
   it('can tokenize comment', () => {
@@ -198,5 +199,36 @@ describe('javascript tokenizer', () => {
     expect(
       tokens.some((token) => token.value === '1234' && token.kind === 'number'),
     ).toBe(true);
+  });
+  it('import statement', () => {
+    let code = "import foo from 'bar';";
+    let tokens = tokenize(code, javascriptRules);
+    ['import', 'from'].forEach((keyword) => {
+      expect(
+        tokens.find(
+          (token) => token.value === keyword && token.kind === 'keyword',
+        ),
+      ).not.toBeFalsy();
+    });
+
+    code = "import * as foo from 'bar';";
+    tokens = tokenize(code, javascriptRules);
+    ['import', 'from'].forEach((keyword) => {
+      expect(
+        tokens.find(
+          (token) => token.value === keyword && token.kind === 'keyword',
+        ),
+      ).not.toBeFalsy();
+    });
+
+    code = "import { foo } from 'bar';";
+    tokens = tokenize(code, javascriptRules);
+    ['import', 'from'].forEach((keyword) => {
+      expect(
+        tokens.find(
+          (token) => token.value === keyword && token.kind === 'keyword',
+        ),
+      ).not.toBeFalsy();
+    });
   });
 });
