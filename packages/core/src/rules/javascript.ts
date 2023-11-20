@@ -50,7 +50,7 @@ export const javascriptBaseRule: ParseRule[] = [
   {
     kind: 'keyword',
     pattern:
-      /\b(await|break|case|catch|class|const|continue|debugger|default|delete|do|else|export|extends|finally|for|function|if|import|in|instanceof|let|new|null|return|static|super|switch|this|throw|try|typeof|var|void|while|with|yield|of)\b/g,
+      /\b(await|break|case|catch|class|const|continue|debugger|default|delete|do|else|export|extends|finally|for|function|if|import|from(?=\s*(?:['"]|$))|in|instanceof|let|new|null|return|static|super|switch|this|throw|try|typeof|var|void|while|with|yield|of)\b/g,
   },
   {
     kind: 'string',

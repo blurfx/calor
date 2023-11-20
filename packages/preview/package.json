@@ -12,8 +12,8 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@calor/core": "^0.0.2",
-    "@calor/highlighter": "^0.0.2"
+    "@calor/core": "workspace:*",
+    "@calor/highlighter": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

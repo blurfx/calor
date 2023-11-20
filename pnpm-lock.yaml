@@ -78,10 +78,10 @@ importers:
   packages/preview:
     dependencies:
       '@calor/core':
-        specifier: ^0.0.2
+        specifier: workspace:*
         version: link:../core
       '@calor/highlighter':
-        specifier: ^0.0.2
+        specifier: workspace:*
         version: link:../highlighter
       react:
         specifier: ^18.2.0
