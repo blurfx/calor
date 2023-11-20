@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { tokenize } from '../../src/tokenizer';
 import javascriptRules from '../../src/rules/javascript';
-import { detectLanguage } from '../../src';
 
 describe('javascript tokenizer', () => {
   it('can tokenize comment', () => {
