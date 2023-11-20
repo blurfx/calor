@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { tokenize } from '../../src';
-import { golangRule } from '../../src/rules/golang';
+import golangRules from '../../src/rules/golang';
 
 describe('golang tokenizer', () => {
   it('can tokenize comment', () => {
@@ -14,7 +14,7 @@ describe('golang tokenizer', () => {
   
   /* this is another comment */
   `,
-      golangRule,
+      golangRules,
     );
     const comments = [
       '// this is comment\n',
@@ -50,7 +50,7 @@ describe('golang tokenizer', () => {
           fmt.Println("hello world")
       }
     `,
-      golangRule,
+      golangRules,
     );
     const keywords = ['package', 'import', 'const', 'func', 'defer', 'if'];
     keywords.forEach((keyword) => {
@@ -77,7 +77,7 @@ describe('golang tokenizer', () => {
           fmt.Println("hello world")
       }
     `,
-      golangRule,
+      golangRules,
     );
     const strings = ['"fmt"', '"testing"', '"log"', "'c'", '"hello world"'];
     const stringTokens = tokens.filter((token) => token.kind === 'string');
@@ -106,7 +106,7 @@ describe('golang tokenizer', () => {
       4__2
       0_xBadFace
     `,
-      golangRule,
+      golangRules,
     );
     const valid = [
       '42',
@@ -154,7 +154,7 @@ describe('golang tokenizer', () => {
     0X_1FFFP-16
     0x15e-2
     `,
-      golangRule,
+      golangRules,
     );
     const valid = [
       '0.',

@@ -1,6 +1,6 @@
 import { ParseRule } from '../types';
 
-const golangRule: ParseRule[] = [
+const golangRules: ParseRule[] = [
   {
     kind: 'comment',
     pattern: /(\/\/.*\n?)|\/\*[^]*?\*\//g,
@@ -49,4 +49,4 @@ const golangRule: ParseRule[] = [
   },
 ];
 
-export default golangRule;
+export default golangRules;
