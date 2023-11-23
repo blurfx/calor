@@ -230,4 +230,19 @@ describe('javascript tokenizer', () => {
       ).not.toBeFalsy();
     });
   });
+  it('from keyword', () => {
+    let code = "import foo from 'bar';";
+    let tokens = tokenize(code, javascriptRules);
+    expect(
+      tokens.find(
+        (token) => token.value === 'from' && token.kind === 'keyword',
+      ),
+    ).not.toBeFalsy();
+
+    code = 'const from = 1;';
+    tokens = tokenize(code, javascriptRules);
+    expect(tokens.find((token) => token.value === 'from').kind).not.toBe(
+      'keyword',
+    );
+  });
 });
