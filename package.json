@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "pnpm recursive run test:ci",
     "pre-commit": "pnpm run --filter \"@calor/*\" pre-commit",
     "build": "pnpm recursive run build",
     "lint": "pnpm build && pnpm run --filter \"@calor/*\" lint",
