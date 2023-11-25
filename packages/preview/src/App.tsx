@@ -7,6 +7,7 @@ import darkTheme from '@calor/highlighter/themes/github-dark.css?inline';
 const exampleCode: Record<string, string> = {
   typescript: 'typescript.ts',
   golang: 'golang.go',
+  cpp: 'cpp.cpp',
 };
 
 const fetchFile = async (path: string) => {
@@ -21,7 +22,7 @@ function App() {
   useEffect(() => {
     (async () => {
       const text = await fetchFile(`./examples/${exampleCode[language]}`);
-      const highlightedCode = highlight(text);
+      const highlightedCode = highlight(text, language);
       setCode(highlightedCode);
     })();
   }, [language]);

@@ -1,3 +1,5 @@
+// https://xo.dev/articles/how-search-engine-works
+
 package main
 
 import (
