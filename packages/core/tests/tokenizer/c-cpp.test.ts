@@ -112,10 +112,8 @@ describe('c/cpp tokenizer', () => {
   it('can tokenize string', () => {
     const tokens = tokenize(
       `
-      #include <iostream>
       int main() {
         std::cout << "Hello, World!";
-        return 0;
       }
     `,
       cppRules,
@@ -123,5 +121,12 @@ describe('c/cpp tokenizer', () => {
     const stringTokens = tokens.filter((token) => token.kind === 'string');
     expect(stringTokens.length).toBe(1);
     expect(stringTokens[0].value).toBe('"Hello, World!"');
+  });
+
+  it('include directive', () => {
+    const tokens = tokenize('#include <iostream>', cppRules);
+    const includeTokens = tokens.filter((token) => token.kind === 'keyword');
+    expect(includeTokens.length).toBe(1);
+    expect(includeTokens[0].value).toBe('#include');
   });
 });
