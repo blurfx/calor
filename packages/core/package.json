@@ -13,6 +13,7 @@
   "scripts": {
     "build": "tsup",
     "test": "vitest",
+    "test:ci": "vitest run",
     "pre-commit": "lint-staged",
     "typecheck": "tsc --noEmit --project .",
     "dry:eslint": "eslint --ext .ts,.tsx ./src ./tests",
