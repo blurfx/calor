@@ -25,12 +25,15 @@ const cppRules: ParseRule[] = [
   },
   {
     kind: 'operator',
-    // pattern: /[+\-*/%&|^!~=<>?:]+|::|\(\)?|\[\]?|\{\}?/g,
     pattern: /[+\-*/%&~|^!=<>?:]+/g,
   },
   {
     kind: 'class',
     pattern: /\b[A-Z_][\w_]*\b/g,
+  },
+  {
+    kind: 'function',
+    pattern: /[a-zA-Z_][\w_]*(?=\s*\()/g,
   },
   {
     kind: 'symbol',
