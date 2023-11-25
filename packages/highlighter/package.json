@@ -1,6 +1,6 @@
 {
   "name": "@calor/highlighter",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "type": "module",
@@ -29,7 +29,7 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "@calor/core": "^0.0.3"
+    "@calor/core": "^0.0.4"
   },
   "publishConfig": {
     "access": "public"
