@@ -129,4 +129,21 @@ describe('c/cpp tokenizer', () => {
     expect(includeTokens.length).toBe(1);
     expect(includeTokens[0].value).toBe('#include');
   });
+  it('struct', () => {
+    const tokens = tokenize(
+      `
+      struct MyStruct {
+        int num;
+        struct foo *bar;
+      };
+    `,
+      cppRules,
+    );
+    const structNameTokens = tokens.filter((token) => token.kind === 'class');
+    expect(structNameTokens.length).toBe(2);
+    expect(structNameTokens.some((token) => token.value === 'MyStruct')).toBe(
+      true,
+    );
+    expect(structNameTokens.some((token) => token.value === 'foo')).toBe(true);
+  });
 });
