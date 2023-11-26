@@ -15,6 +15,11 @@ const cppRules: ParseRule[] = [
     pattern: /(#\s*(?:define|if|elif|else|endif|import|error|line))\b/g,
   },
   {
+    kind: 'class',
+    pattern: /\b(struct)(\s+)([a-zA-Z$_][\w$_]*)\b/g,
+    matchHints: ['keyword', 'plain', 'class'],
+  },
+  {
     kind: 'keyword',
     pattern:
       /\b(auto|break|case|char|const|continue|default|do|double|else|enum|extern|float|for|goto|if|int|long|register|return|short|signed|sizeof|static|struct|switch|typedef|union|unsigned|void|volatile|while|bool|true|false|catch|class|const_cast|delete|dynamic_cast|explicit|export|friend|inline|mutable|namespace|new|operator|private|protected|public|reinterpret_cast|static_cast|template|this|throw|try|typeid|typename|using|virtual|nullptr|null|string|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|xor|xor_eq)\b/g,
