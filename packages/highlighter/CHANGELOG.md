@@ -1,5 +1,13 @@
 # @calor/highlighter
 
+## 0.0.5
+
+### Patch Changes
+
+- 82e284c: Improve C/C++ struct type tokenizing"
+- Updated dependencies [82e284c]
+  - @calor/core@0.0.5
+
 ## 0.0.4
 
 ### Patch Changes
