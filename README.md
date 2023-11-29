@@ -10,3 +10,4 @@ Currently supported languages:
 - JavaScript
 - TypeScript
 - Go
+- C/C++
