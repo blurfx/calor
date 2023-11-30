@@ -55,16 +55,3 @@ const simpleMath = 1 + 2;
   )
 }
 ```
-
-## Language support
-
-calor is still in development, it doesn't support all languages.
-You can check the [issues](https://github.com/blurfx/calor/issues?q=is%3Aissue+label%3A%22language+support%22) for languages that are in development or planned.
-
-- [x] JavaScript
-- [x] TypeScript
-- [x] Go
-- [ ] Python
-- [ ] C
-- [ ] C++
-- [ ] Java
